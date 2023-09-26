@@ -50,6 +50,36 @@ void ExibirOpcoesDoMenu()
     }
 
 }
-
+/*
 ExibirMensagemDeBoasVindas();
 ExibirOpcoesDoMenu();
+*/
+
+/* EXERCÍCIOS */
+
+Random rnd = new Random();
+int numeroAleatorio = rnd.Next(1, 101);
+Console.WriteLine(numeroAleatorio);
+
+do
+{
+    Console.Write("Adivinhe o número aleatório: ");
+    String chute = Console.ReadLine()!;
+    int numeroEscolhido = int.Parse(chute);
+
+    if (numeroEscolhido == numeroAleatorio)
+    {
+        Console.WriteLine("Parabéns, você acertou!");
+        break;
+    }
+    // valida se é m aior ou menor
+    else if (numeroEscolhido > numeroAleatorio)
+    {
+        Console.WriteLine("O número aleatório é menor");
+    }
+    else
+    {
+        Console.WriteLine("O número aleatório é maior");
+    }
+
+} while (true);
