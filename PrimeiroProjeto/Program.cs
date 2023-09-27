@@ -116,8 +116,9 @@ void AvaliarBanda()
         int nota = int.Parse(Console.ReadLine()!);
         if (nota < 0 || nota > 10)
         {
-            Console.WriteLine("Nota inválida");
+            Console.WriteLine("\nNota inválida");
             Thread.Sleep(2000);
+            Console.Clear();
             ExibirOpcoesDoMenu();
         }
         else
