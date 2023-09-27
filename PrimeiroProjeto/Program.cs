@@ -162,6 +162,7 @@ do
 } while (true);
  */
 
+
 /* EXERCÍCIO 2*/
 
 
@@ -173,14 +174,5 @@ Dictionary<string, List<int>> vendasCarros = new Dictionary<string, List<int>> {
     { "Ferrari LaFerrari", new List<int> { 7, 6, 5, 8, 10 } }
 };
 
-Random rnd = new Random();
-int chave = rnd.Next(1, 6);
-
-List<int> vendas = vendasCarros["Koenigsegg Agera RS"];
-
-int soma = vendas.Sum();
-double media = vendas.Average();
-int qtdVendas = vendas.Count();
-Console.WriteLine($"soma das vendas: {soma}");
-Console.WriteLine($"Quantidade de vendas: {qtdVendas}");
-Console.WriteLine($"média das vendas: {soma} / {qtdVendas} = {media}");
+double vendas = vendasCarros["Ferrari LaFerrari"].Average();
+Console.WriteLine($"Média de vendas: {vendas}");
