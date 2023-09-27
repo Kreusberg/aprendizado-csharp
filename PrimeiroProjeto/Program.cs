@@ -2,8 +2,10 @@
 using System.Runtime;
 
 String mensagemDeBoasVindas = "Boas vindas ao Screen Sound";
-List<string> listaDasBandas = new List<String>() { "U2", "Yhe Beatles", "Calypso"};
-
+//List<string> listaDasBandas = new List<String>() { "U2", "Yhe Beatles", "Calypso"};
+Dictionary<string, List<int>> bandasRegistradas = new Dictionary<string, List<int>>();
+bandasRegistradas.Add("Linkin Park", new List<int> { 10, 8, 3, 6});
+bandasRegistradas.Add("The Beatles", new List<int>());
 void ExibirLogo()
 {
     Console.WriteLine(@"
@@ -40,7 +42,7 @@ void ExibirOpcoesDoMenu()
             MostrarBandasRegistradas();
             break;
         case 3:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNumerica);
+            AvaliarBanda();
             break;
         case 4:
             Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNumerica);
@@ -61,7 +63,7 @@ void RegistrarBanda()
     ExibirTituloDaOpcao("Registro de bandas");
     Console.Write("Digite o nome da banda que deseja registrar: ");
     String nomeDaBanda = Console.ReadLine()!;
-    listaDasBandas.Add(nomeDaBanda); 
+    bandasRegistradas.Add(nomeDaBanda, new List<int>());
     Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso");
     Thread.Sleep(2000);
     Console.Clear();
@@ -78,7 +80,7 @@ void MostrarBandasRegistradas()
     //    Console.WriteLine($"Banda: {listaDasBandas[i]}");
     //}
 
-    foreach (string banda in listaDasBandas)
+    foreach (string banda in bandasRegistradas.Keys)
     {
         Console.WriteLine($"Banda: {banda}");
     }
@@ -99,7 +101,37 @@ void ExibirTituloDaOpcao(string titulo)
     Console.WriteLine(asteriscos);
 }
 
-ExibirOpcoesDoMenu();
+void AvaliarBanda()
+{
+    Console.Clear();
+    ExibirTituloDaOpcao("Avaliar banda");
+
+    // digite qual banda deseja avaliar
+    Console.Write("Digite o nome da banda que deseja avaliar: ");
+    string nomeDaBanda = Console.ReadLine()!;
+    if (bandasRegistradas.Keys.Contains(nomeDaBanda))
+    {
+        // verificar se a banda existe >> atribuir uma nota
+        Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
+        int nota = int.Parse(Console.ReadLine()!);
+        bandasRegistradas[nomeDaBanda].Add(nota);
+        Console.WriteLine($"\nA nota {nota} foi registreada com sucesso para a banda {nomeDaBanda}");
+        Thread.Sleep(4000);
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+
+    } else
+    {
+        Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada");
+        Console.WriteLine("Digite uma tecla para voltar ao menu principal");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    }
+    // senão, volta ao menu principal
+}
+
+//ExibirOpcoesDoMenu();
 
 /* EXERCÍCIOS
 
@@ -129,3 +161,26 @@ do
 
 } while (true);
  */
+
+/* EXERCÍCIO 2*/
+
+
+Dictionary<string, List<int>> vendasCarros = new Dictionary<string, List<int>> {
+    { "Bugatti Veyron", new List<int> { 10, 15, 12, 8, 5 } },
+    { "Koenigsegg Agera RS", new List<int> { 2, 3, 5, 6, 7 } },
+    { "Lamborghini Aventador", new List<int> { 20, 18, 22, 24, 16 } },
+    { "Pagani Huayra", new List<int> { 4, 5, 6, 5, 4 } },
+    { "Ferrari LaFerrari", new List<int> { 7, 6, 5, 8, 10 } }
+};
+
+Random rnd = new Random();
+int chave = rnd.Next(1, 6);
+
+List<int> vendas = vendasCarros["Koenigsegg Agera RS"];
+
+int soma = vendas.Sum();
+double media = vendas.Average();
+int qtdVendas = vendas.Count();
+Console.WriteLine($"soma das vendas: {soma}");
+Console.WriteLine($"Quantidade de vendas: {qtdVendas}");
+Console.WriteLine($"média das vendas: {soma} / {qtdVendas} = {media}");
